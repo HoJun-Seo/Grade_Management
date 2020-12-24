@@ -18,7 +18,7 @@ public class Grade {
 	private int math;
 	private int english;
 
-	@OneToOne(mappedBy = "grade")
+	@OneToOne(mappedBy = "grade", fetch = FetchType.LAZY)
 	private Student student;
 
 

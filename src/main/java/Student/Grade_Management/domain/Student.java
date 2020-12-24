@@ -20,11 +20,22 @@ public class Student {
 	@Embedded
 	private Address address;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "student_class_id")
 	private Student_Class student_class;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "grade_id")
 	private Grade grade;
+
+	// 연관관계 편의 메소드
+	public void setStudent_class(Student_Class student_class){
+		this.student_class = student_class;
+		student_class.getStudentList().add(this);
+	}
+
+	public void setGrade(Grade grade) {
+		this.grade = grade;
+		grade.setStudent(this);
+	}
 }

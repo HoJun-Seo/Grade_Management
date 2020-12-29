@@ -8,7 +8,7 @@
 - Thymeleaf
 - H2 Database (추후 MySQL 등으로 변경예정)
 - BootStrap
-- 
+- AWS
 
 ## 프로젝트 개요
 데이터를 입력받은 학생들의 성적 현황 및 관리를 위한 웹 사이트를 개발해보자.

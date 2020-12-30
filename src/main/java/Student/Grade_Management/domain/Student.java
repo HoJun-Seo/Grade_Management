@@ -27,7 +27,7 @@ public class Student {
 	private Student_Class student_class;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "grade_id", nullable = false)
+	@JoinColumn(name = "grade_id", unique = true)
 	private Grade grade;
 
 	public Student() {

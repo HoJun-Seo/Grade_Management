@@ -13,7 +13,7 @@ import java.util.List;
 public class Student_Class {
 
 	@Id @GeneratedValue
-	@Column(name = "student_class_id", nullable = false)
+	@Column(name = "student_class_id")
 	private Long id;
 
 	@Column(nullable = false)
@@ -22,9 +22,13 @@ public class Student_Class {
 	private String name;
 
 	@OneToMany(mappedBy = "student_class")
-	@Column(nullable = false)
 	List<Student> studentList = new ArrayList<>();
 
 	public Student_Class() {
+	}
+
+	public Student_Class(int number, String name) {
+		this.number = number;
+		this.name = name;
 	}
 }

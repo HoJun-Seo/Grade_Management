@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Grade {
 
 	@Id @GeneratedValue
-	@Column(name = "grade_id", nullable = false)
+	@Column(name = "grade_id")
 	private Long id;
 
 	@Column(nullable = false)

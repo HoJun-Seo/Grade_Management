@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-
 public class StudentService {
 
 	private final StudentRepository studentRepository;
@@ -35,7 +34,11 @@ public class StudentService {
 		return studentRepository.findAll();
 	}
 
-	public List<Student> findOne(String studentId){
-		return studentRepository.findById(studentId);
+	public Student findOne(String studentId){
+		return studentRepository.findById(studentId).get(0);
+	}
+
+	public List<Student> findByName(String name) {
+		return studentRepository.findByName(name);
 	}
 }

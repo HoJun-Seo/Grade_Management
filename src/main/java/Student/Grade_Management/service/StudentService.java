@@ -17,9 +17,9 @@ public class StudentService {
 	private final StudentRepository studentRepository;
 
 	@Transactional
-	public String join(Student student, Student_Class student_class){
+	public String join(Student student){
 		validateDuplicateStudent(student);
-		studentRepository.save(student, student_class);
+		studentRepository.save(student);
 		return student.getId();
 	}
 

@@ -1,5 +1,6 @@
 package Student.Grade_Management.service;
 
+import Student.Grade_Management.domain.Student;
 import Student.Grade_Management.domain.Student_Class;
 import Student.Grade_Management.repository.StudentClassRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +26,20 @@ public class StudentClassService {
 	private void validateduplicateClass(Student_Class student_class) {
 		List<Student_Class> student_classList = studentClassRepository.findOne(student_class.getId());
 		if (!student_classList.isEmpty()){
+			throw new IllegalStateException("이미 해당 분반이 존재하고 있습니다.");
+		}
+
+		Student_Class student_classList_name = studentClassRepository.findByName(student_class.getName());
+		if (student_classList_name != null){
 			throw new IllegalStateException("이미 해당 이름의 분반이 존재하고 있습니다.");
 		}
 	}
 
 	public Student_Class findByName(String class_name){
 		return studentClassRepository.findByName(class_name);
+	}
+
+	public List<Student> findStudents_class(String class_name){
+		return studentClassRepository.findStudents_class(class_name);
 	}
 }

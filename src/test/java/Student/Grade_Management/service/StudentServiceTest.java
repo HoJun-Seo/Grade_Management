@@ -14,6 +14,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -36,6 +38,20 @@ public class StudentServiceTest {
 	    Long classId = studentClassService.create_class(student_class);
 	    //then
 		Assert.assertEquals(student_class, studentClassRepository.findOne(student_class.getId()).get(0));
+	}
+
+	@Test
+	public void 분반_학생_찾기() throws Exception{
+	    //given
+		List<Student> students_list = studentClassService.findStudents_class("1반");
+
+
+		//when
+
+	    //then
+		for (Student s : students_list){
+			System.out.println(s.getName());
+		}
 	}
 
 	@Test

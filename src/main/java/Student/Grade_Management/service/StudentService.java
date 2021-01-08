@@ -30,7 +30,7 @@ public class StudentService {
 		}
 	}
 
-	public List<Student> findStudents(){
+	public List<Student> findStudents(){ // 분반 상관없이 모든 학생들 검색
 		return studentRepository.findAll();
 	}
 

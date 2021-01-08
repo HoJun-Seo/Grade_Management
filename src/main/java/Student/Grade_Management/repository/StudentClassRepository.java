@@ -1,5 +1,6 @@
 package Student.Grade_Management.repository;
 
+import Student.Grade_Management.domain.Student;
 import Student.Grade_Management.domain.Student_Class;
 import org.springframework.stereotype.Repository;
 
@@ -32,5 +33,11 @@ public class StudentClassRepository {
 		return em.createQuery("select sc from Student_Class sc where sc.name = :class_name", Student_Class.class)
 				.setParameter("class_name", class_name)
 				.getSingleResult();
+	}
+
+	public List<Student> findStudents_class(String class_name){
+		return em.createQuery("select s from Student s where s.student_class.name = :class_name", Student.class)
+				.setParameter("class_name", class_name)
+				.getResultList();
 	}
 }

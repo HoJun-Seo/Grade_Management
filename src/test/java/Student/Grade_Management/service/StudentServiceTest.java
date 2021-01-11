@@ -29,11 +29,10 @@ public class StudentServiceTest {
 	@Autowired StudentClassService studentClassService;
 	@Autowired StudentClassRepository studentClassRepository;
 
-	@Test
-	@Rollback(value = false)
+	@Test(expected = IllegalStateException.class)
 	public void 학생_분반_등록() throws Exception{
 	    //given
-		Student_Class student_class = new Student_Class(10,"1반");
+		Student_Class student_class = new Student_Class(10,"2반");
 	    //when
 	    Long classId = studentClassService.create_class(student_class);
 	    //then
@@ -74,19 +73,20 @@ public class StudentServiceTest {
 	@Test(expected = IllegalStateException.class)
 	public void 중복_학생_예외() throws Exception{
 	    //given
-		Student_Class student_class = new Student_Class(10,"1반");
+
+		Student_Class student_class = studentClassService.findByName("1반");
 
 	    Student student1 = new Student();
 	    student1.setId("2014758058");
 	    student1.setName("서호준");
 	    student1.setAddress(new Address("부산", "사상로", "147"));
-	    student1.setStudent_class(student_class);
+		student1.setStudent_class(student_class);
 
 	    Student student2 = new Student();
 	    student2.setId("2014758058");
-		student1.setName("서호준");
-		student1.setAddress(new Address("부산", "사상로", "147"));
-		student1.setStudent_class(student_class);
+		student2.setName("서호준");
+		student2.setAddress(new Address("부산", "사상로", "147"));
+		student2.setStudent_class(student_class);
 
 	    //when
 	    studentService.join(student1);

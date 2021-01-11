@@ -29,10 +29,11 @@ public class StudentServiceTest {
 	@Autowired StudentClassService studentClassService;
 	@Autowired StudentClassRepository studentClassRepository;
 
-	@Test(expected = IllegalStateException.class)
+	@Test
+	@Rollback(value = false)
 	public void 학생_분반_등록() throws Exception{
 	    //given
-		Student_Class student_class = new Student_Class(10,"2반");
+		Student_Class student_class = new Student_Class(10,"4반");
 	    //when
 	    Long classId = studentClassService.create_class(student_class);
 	    //then

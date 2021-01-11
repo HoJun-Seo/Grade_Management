@@ -4,9 +4,11 @@ import Student.Grade_Management.domain.Student;
 import Student.Grade_Management.domain.Student_Class;
 import Student.Grade_Management.repository.StudentClassRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Service
@@ -29,9 +31,13 @@ public class StudentClassService {
 			throw new IllegalStateException("이미 해당 분반이 존재하고 있습니다.");
 		}
 
-		Student_Class student_classList_name = studentClassRepository.findByName(student_class.getName());
-		if (student_classList_name != null){
-			throw new IllegalStateException("이미 해당 이름의 분반이 존재하고 있습니다.");
+		try{ // 해당 이름의 분반이 존재하지 않을 경우 분반 생성
+			Student_Class student_classList_name = studentClassRepository.findByName(student_class.getName());
+			if (student_classList_name != null){
+				throw new IllegalStateException("이미 해당 이름의 분반이 존재하고 있습니다.");
+			}
+		}
+		catch (EmptyResultDataAccessException emptyResultDataAccessException){
 		}
 	}
 

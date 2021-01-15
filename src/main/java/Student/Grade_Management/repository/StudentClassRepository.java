@@ -2,6 +2,7 @@ package Student.Grade_Management.repository;
 
 import Student.Grade_Management.domain.Student;
 import Student.Grade_Management.domain.Student_Class;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -9,10 +10,10 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class StudentClassRepository {
 
-	@PersistenceContext
-	private EntityManager em;
+	private final EntityManager em;
 
 	public void create(Student_Class student_class){
 		em.persist(student_class);

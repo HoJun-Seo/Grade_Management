@@ -14,12 +14,15 @@ public class Grade {
 	@Column(name = "grade_id")
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(name = "korean_score", nullable = false)
 	private int korean;
-	@Column(nullable = false)
+	@Column(name = "math_score", nullable = false)
 	private int math;
-	@Column(nullable = false)
+	@Column(name = "english_score", nullable = false)
 	private int english;
+
+	@Column(name = "average")
+	private double avg = (korean + math + english) / 3;
 
 	@OneToOne(mappedBy = "grade", fetch = FetchType.LAZY)
 	private Student student;

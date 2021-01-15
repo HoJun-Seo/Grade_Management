@@ -38,6 +38,7 @@ public class StudentClassService {
 			}
 		}
 		catch (EmptyResultDataAccessException emptyResultDataAccessException){
+			System.out.println(emptyResultDataAccessException.getMessage() + " : 분반 생성이 가능합니다.");
 		}
 	}
 

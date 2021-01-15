@@ -26,7 +26,7 @@ public class Student {
 	@JoinColumn(name = "student_class_id", nullable = false)
 	private Student_Class student_class;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "grade_id", unique = true)
 	private Grade grade;
 

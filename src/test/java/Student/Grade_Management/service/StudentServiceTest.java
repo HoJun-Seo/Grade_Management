@@ -30,10 +30,9 @@ public class StudentServiceTest {
 	@Autowired StudentClassRepository studentClassRepository;
 
 	@Test
-	@Rollback(value = false)
 	public void 학생_분반_등록() throws Exception{
 	    //given
-		Student_Class student_class = new Student_Class(10,"4반");
+		Student_Class student_class = new Student_Class(10,"6반");
 	    //when
 	    Long classId = studentClassService.create_class(student_class);
 	    //then
@@ -44,8 +43,6 @@ public class StudentServiceTest {
 	public void 분반_학생_찾기() throws Exception{
 	    //given
 		List<Student> students_list = studentClassService.findStudents_class("1반");
-
-
 		//when
 
 	    //then

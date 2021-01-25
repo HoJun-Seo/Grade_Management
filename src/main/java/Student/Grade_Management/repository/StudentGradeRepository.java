@@ -19,19 +19,24 @@ public class StudentGradeRepository {
 		em.persist(grade);
 	}
 
-	public List<Student> findByUpperGrade(int score, String score_name){
+	public Grade findGrade(Student student){
+		Grade grade = student.getGrade();
+		return em.find(Grade.class, grade.getId());
+	}
+
+	public List<Grade> findByUpperGrade(int score, String score_name){
 		if (score_name == "korean_score"){
-			return em.createQuery("select s from Student s where s.grade.korean >= :score order by s.grade.korean desc")
+			return em.createQuery("select g from Grade g where g.korean >= :score order by g.korean desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
 		else if (score_name == "math_score"){
-			return em.createQuery("select s from Student s where s.grade.math >= :score order by s.grade.math desc")
+			return em.createQuery("select g from Grade g where g.math >= :score order by g.math desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
 		else if (score_name == "english_score"){
-			return em.createQuery("select s from Student s where s.grade.english >= :score order by s.grade.english desc")
+			return em.createQuery("select g from Grade g where g.english >= :score order by g.english desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
@@ -40,19 +45,19 @@ public class StudentGradeRepository {
 		}
 	}
 
-	public List<Student> findByLowerGrade(int score, String score_name){
+	public List<Grade> findByLowerGrade(int score, String score_name){
 		if (score_name == "korean_score"){
-			return em.createQuery("select s from Student s where s.grade.korean < :score order by s.grade.korean desc")
+			return em.createQuery("select g from Grade g where g.korean < :score order by g.korean desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
 		else if (score_name == "math_score"){
-			return em.createQuery("select s from Student s where s.grade.math < :score order by s.grade.math desc")
+			return em.createQuery("select g from Grade g where g.math < :score order by g.math desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
 		else if (score_name == "english_score"){
-			return em.createQuery("select s from Student s where s.grade.english < :score order by s.grade.english desc ")
+			return em.createQuery("select g from Grade g where g.english < :score order by g.english desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
@@ -61,22 +66,20 @@ public class StudentGradeRepository {
 		}
 	}
 
-	public List<Student> findAllAverage(){
-		return em.createQuery("select s from Student s order by s.grade.avg desc")
+	public List<Grade> findAllAverage(){
+		return em.createQuery("select g from Grade g order by g.avg desc")
 				.getResultList();
 	}
 
-	public List<Student> findByUpperAverage(double average){
-		return em.createQuery("select s from Student s where s.grade.avg >= :average order by s.grade.avg desc")
+	public List<Grade> findByUpperAverage(double average){
+		return em.createQuery("select g from Grade g where g.avg >= :average order by g.avg desc")
 				.setParameter("average", average)
 				.getResultList();
 	}
 
-	public List<Student> findByLowerAverage(double average){
-		return em.createQuery("select s from Student s where s.grade.avg < :average order by s.grade.avg desc")
+	public List<Grade> findByLowerAverage(double average){
+		return em.createQuery("select g from Grade g where g.avg < :average order by g.avg desc")
 				.setParameter("average", average)
 				.getResultList();
 	}
-
-
 }

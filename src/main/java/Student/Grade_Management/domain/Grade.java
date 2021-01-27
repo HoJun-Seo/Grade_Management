@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 public class Grade {
 
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "grade_id")
 	private Long id;
 
@@ -22,7 +22,7 @@ public class Grade {
 	private int english;
 
 	@Column(name = "average")
-	private double avg = (korean + math + english) / 3;
+	private double avg;
 
 	@OneToOne(mappedBy = "grade", fetch = FetchType.LAZY)
 	private Student student;

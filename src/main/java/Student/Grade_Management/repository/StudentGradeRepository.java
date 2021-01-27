@@ -19,9 +19,10 @@ public class StudentGradeRepository {
 		em.persist(grade);
 	}
 
-	public Grade findGrade(Student student){
-		Grade grade = student.getGrade();
-		return em.find(Grade.class, grade.getId());
+	public Grade findGrade(String studentId){
+		return em.createQuery("select g from Grade g where g.student.id =:studentId", Grade.class)
+				.setParameter("studentId", studentId)
+				.getSingleResult();
 	}
 
 	public List<Grade> findByUpperGrade(int score, String score_name){

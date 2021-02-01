@@ -67,7 +67,7 @@ public class StudentGradeRepository {
 		}
 	}
 
-	public List<Grade> findAllAverage(){
+	public List<Grade> findAll(){
 		return em.createQuery("select g from Grade g order by g.avg desc")
 				.getResultList();
 	}

@@ -8,6 +8,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -25,5 +27,10 @@ public class StudentGradeService {
 	public Grade findOne(Student student){
 		Grade student_grade = studentGradeRepository.findGrade(student.getId());
 		return student_grade;
+	}
+
+	public List<Grade> findAll(){
+		List<Grade> studentgrade_list = studentGradeRepository.findAll();
+		return studentgrade_list;
 	}
 }

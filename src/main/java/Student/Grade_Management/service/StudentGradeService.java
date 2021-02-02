@@ -33,4 +33,24 @@ public class StudentGradeService {
 		List<Grade> studentgrade_list = studentGradeRepository.findAll();
 		return studentgrade_list;
 	}
+
+	public List<Integer> findByUpperGrade(int score, String score_name){
+		List<Integer> uppergrade_list = studentGradeRepository.findByUpperGrade(score, score_name);
+		return uppergrade_list;
+	}
+
+	public List<Integer> findByLowerGrade(int score, String score_name){
+		List<Integer> lowergrade_list = studentGradeRepository.findByLowerGrade(score, score_name);
+		return lowergrade_list;
+	}
+
+	public List<Double> findByUpperAverage(double average){
+		List<Double> upperAverage_list = studentGradeRepository.findByUpperAverage(average);
+		return upperAverage_list;
+	}
+
+	public List<Double> findBuLowerAverage(double average){
+		List<Double> lowerAverage_list = studentGradeRepository.findByLowerAverage(average);
+		return lowerAverage_list;
+	}
 }

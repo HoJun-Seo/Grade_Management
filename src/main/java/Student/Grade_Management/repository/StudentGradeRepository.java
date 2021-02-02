@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -25,46 +26,44 @@ public class StudentGradeRepository {
 				.getSingleResult();
 	}
 
-	public List<Grade> findByUpperGrade(int score, String score_name){
+	public List<Integer> findByUpperGrade(int score, String score_name){
 		if (score_name == "korean_score"){
-			return em.createQuery("select g from Grade g where g.korean >= :score order by g.korean desc")
+			return em.createQuery("select g.korean from Grade g where g.korean >= :score order by g.korean desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
 		else if (score_name == "math_score"){
-			return em.createQuery("select g from Grade g where g.math >= :score order by g.math desc")
+			return em.createQuery("select g.math from Grade g where g.math >= :score order by g.math desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
 		else if (score_name == "english_score"){
-			return em.createQuery("select g from Grade g where g.english >= :score order by g.english desc")
+			return em.createQuery("select g.english from Grade g where g.english >= :score order by g.english desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
-		else {
-			throw new IllegalStateException("과목 이름이 잘못 되었습니다.");
-		}
+		List<Integer> non_subject_list = new ArrayList<Integer>();
+		return non_subject_list;
 	}
 
-	public List<Grade> findByLowerGrade(int score, String score_name){
+	public List<Integer> findByLowerGrade(int score, String score_name){
 		if (score_name == "korean_score"){
-			return em.createQuery("select g from Grade g where g.korean < :score order by g.korean desc")
+			return em.createQuery("select g.korean from Grade g where g.korean <= :score order by g.korean desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
 		else if (score_name == "math_score"){
-			return em.createQuery("select g from Grade g where g.math < :score order by g.math desc")
+			return em.createQuery("select g.math from Grade g where g.math <= :score order by g.math desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
 		else if (score_name == "english_score"){
-			return em.createQuery("select g from Grade g where g.english < :score order by g.english desc")
+			return em.createQuery("select g.english from Grade g where g.english <= :score order by g.english desc")
 					.setParameter("score", score)
 					.getResultList();
 		}
-		else {
-			throw new IllegalStateException("과목 이름이 잘못 되었습니다.");
-		}
+		List<Integer> non_subject_list = new ArrayList<Integer>();
+		return non_subject_list;
 	}
 
 	public List<Grade> findAll(){
@@ -72,14 +71,14 @@ public class StudentGradeRepository {
 				.getResultList();
 	}
 
-	public List<Grade> findByUpperAverage(double average){
-		return em.createQuery("select g from Grade g where g.avg >= :average order by g.avg desc")
+	public List<Double> findByUpperAverage(double average){
+		return em.createQuery("select g.avg from Grade g inner join g.student s where g.avg >= :average order by g.avg desc")
 				.setParameter("average", average)
 				.getResultList();
 	}
 
-	public List<Grade> findByLowerAverage(double average){
-		return em.createQuery("select g from Grade g where g.avg < :average order by g.avg desc")
+	public List<Double> findByLowerAverage(double average){
+		return em.createQuery("select g.avg from Grade g inner join g.student s where g.avg <= :average order by g.avg desc")
 				.setParameter("average", average)
 				.getResultList();
 	}

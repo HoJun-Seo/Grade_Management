@@ -5,8 +5,8 @@
 - Java (JDK >= 8)
 - Spring boot
 - Spring Data JPA
-- Thymeleaf
-- H2 Database (추후 MySQL 등으로 변경예정)
+- JSP/Servlet
+- H2 Database (추후 MySQL, Oracle 등으로 변경예정)
 - BootStrap
 - AWS
 

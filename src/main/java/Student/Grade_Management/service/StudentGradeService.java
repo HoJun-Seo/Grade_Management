@@ -49,7 +49,7 @@ public class StudentGradeService {
 		return upperAverage_list;
 	}
 
-	public List<Double> findBuLowerAverage(double average){
+	public List<Double> findByLowerAverage(double average){
 		List<Double> lowerAverage_list = studentGradeRepository.findByLowerAverage(average);
 		return lowerAverage_list;
 	}
